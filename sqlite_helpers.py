@@ -24,19 +24,33 @@ def create_table(filename):
 def insert_url(filename, link, alias):
     connection = sqlite3.connect(filename) # connect to database (creates if none found)
     cursor = connection.cursor()
+    # if url with alias already exists
+    if retrieve_url(filename, alias):
+        return False
     # the function inserts a row into the table
     input = f'INSERT INTO urls(link, alias, timestamp) VALUES(?, ?, ?)'
     val = (link, alias, datetime.now())
     cursor.execute(input, val)
     connection.commit()
+    return True
+    
 
-def delete_url(filename, link):
+def delete_url(filename, alias):
     connection = sqlite3.connect(filename) # connect to database (creates if none found)
     cursor = connection.cursor()
+    count = cursor.rowcount()
     # the function deletes a row from the table
-    input = f'DELETE FROM urls WHERE link={link}'
-    cursor.execute(input)
-    connection.commit()
+    try:
+        input = f'DELETE FROM urls WHERE alias="{alias}"'
+        cursor.execute(input)
+        connection.commit()
+        # check if entries have changed
+        if(count > cursor.rowcount()):
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
 
 def list_urls(filename):
     connection = sqlite3.connect(filename) # connect to database (creates if none found)
