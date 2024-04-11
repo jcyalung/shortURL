@@ -1,6 +1,6 @@
 """
 This file contains helper functions for creating and managing sqlite databases.
-Created by Joshua Yalung.
+Created by Joshua Yalung. :)
 """
 import sqlite3
 from datetime import datetime
