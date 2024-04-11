@@ -10,7 +10,10 @@ cursor = connection.cursor()
 def table_creation():
     # the function creates a table that has:
     # url, alias, timestamp, and id.
-    cursor.execute("CREATE TABLE url(link, alias, timestamp, id)")
+    try:
+        cursor.execute("CREATE TABLE urls(link, alias, timestamp, id)")
+    except Exception as e:
+        print(e)
 
 def table_insert(link, alias, timestamp, id):
     # the function inserts a row into the table
