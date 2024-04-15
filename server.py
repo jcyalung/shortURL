@@ -29,7 +29,7 @@ def create_url(request : Request):
         result = insert_url(FILE, req_json["link"], req_json["alias"])
         # if no duplicates
         if result:
-            return({"message" : f"success: inserted link {req_json["link"]} as alias {req_json["alias"]}"})
+            return({"url" : req_json["link"], "alias": req_json["alias"]})
         else:
             return ({"message" : f"A link with the alias {req_json["alias"]} already exists"})
     # if alias not defined
