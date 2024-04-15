@@ -38,14 +38,13 @@ def insert_url(filename, link, alias):
 def delete_url(filename, alias):
     connection = sqlite3.connect(filename) # connect to database (creates if none found)
     cursor = connection.cursor()
-    count = cursor.rowcount()
     # the function deletes a row from the table
     try:
         input = f'DELETE FROM urls WHERE alias="{alias}"'
         cursor.execute(input)
         connection.commit()
         # check if entries have changed
-        if(count > cursor.rowcount()):
+        if(cursor.rowcount() > 0):
             return True
         else:
             return False

@@ -15,10 +15,6 @@ app.add_middleware(
 )
 FILE='urls.db'
 
-@app.get("/")
-def root():
-    return({ "message": "hello world" })
-
 @app.post("/create-url")
 def create_url(request : Request):
     # process request into json
