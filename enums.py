@@ -1,0 +1,15 @@
+import enum
+# OK, NOT_FOUND, INVALID, BAD_REQUEST, CONFLICT, INTERNAL_SERVER_ERROR
+class Code(enum.Enum):
+    OK = 200
+    NOT_FOUND = 404
+    INVALID = 422
+    BAD_REQUEST = 400
+    CONFLICT = 409
+    INTERNAL_SERVER_ERROR = 500
+    
+    def __init__(self, code):
+        self.code = code
+    
+    def getCode(self):
+        return self.code
